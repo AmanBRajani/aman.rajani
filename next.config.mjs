@@ -1,12 +1,11 @@
 // next.config.mjs
-/** @type {import('next').NextConfig} */
+
 const nextConfig = {
-  // your existing config
+  reactStrictMode: true,
   images: {
-    unoptimized: true, // optional, helps with Netlify compatibility
+    unoptimized: true, // optional, if you want to disable image optimization
   },
+  // Add any other Next.js config options here
 };
 
-const withNetlify = require('@netlify/next');
-
-module.exports = withNetlify(nextConfig);
+export default nextConfig;
