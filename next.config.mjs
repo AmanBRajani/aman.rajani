@@ -1,4 +1,12 @@
+// next.config.mjs
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  // your existing config
+  images: {
+    unoptimized: true, // optional, helps with Netlify compatibility
+  },
+};
 
-export default nextConfig;
+const withNetlify = require('@netlify/next');
+
+module.exports = withNetlify(nextConfig);
