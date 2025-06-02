@@ -54,6 +54,31 @@ export default function Dashboard() {
         >
           My dashboard is getting a dope upgrade. Stay tuned for the magic. 🚀
         </motion.p>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8 }}
+          style={{
+            fontSize: '1.2rem',
+            color: '#aaa',
+            marginTop: '1.5rem',
+            fontWeight: 'bold',
+            letterSpacing: '1.5px',
+            fontFamily: 'monospace',
+            textShadow: '0 2px 8px #222, 0 0 2px #fff2',
+          }}>
+          <span style={{
+            background: 'linear-gradient(90deg, #ff8a00, #e52e71)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            padding: '0.2em 0.6em',
+            borderRadius: '0.5em',
+            boxShadow: '0 2px 12px #e52e7133',
+            display: 'inline-block'
+          }}>
+            -AmanBRajani
+          </span>
+        </motion.p>
       </motion.div>
     </div>
   );
