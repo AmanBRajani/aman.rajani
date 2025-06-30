@@ -3,6 +3,8 @@ import "./globals.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import AppTransitionProvider from '../components/AppTransitionProvider';
+import ScrollToTop from '../components/ScrollToTop';
+import ScrollProgress from '../components/ScrollProgress';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,10 +25,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}>
+        <ScrollProgress />
         <Navbar />
         <AppTransitionProvider>
           {children}
         </AppTransitionProvider>
+        <ScrollToTop />
         <Footer />
       </body>
     </html>

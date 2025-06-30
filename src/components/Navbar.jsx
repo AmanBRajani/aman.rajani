@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
+// import ThemeToggle from './ThemeToggle';
 
 export default function Navbar() {
   const router = useRouter();
@@ -26,21 +27,16 @@ export default function Navbar() {
       </motion.div>
       <div className="space-x-4 md:space-x-8 flex items-center">
         {navLinks.map((link, idx) => (
-          <motion.div
-            key={link.name}
-            whileHover={{ scale: 1.12, y: -2, boxShadow: '0 4px 24px #fff5' }}
-            whileTap={{ scale: 0.95, y: 2 }}
-            transition={{ type: 'spring', stiffness: 400 }}
-            className="inline-block"
-          >
+          <div key={link.name} className="inline-block">
             <Link
               href={link.href}
               className="px-4 py-2 rounded-lg font-semibold text-lg transition-colors duration-200 hover:bg-gradient-to-r hover:from-orange-400 hover:to-pink-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-pink-400"
             >
               {link.name}
             </Link>
-          </motion.div>
+          </div>
         ))}
+        {/* <ThemeToggle /> */}
       </div>
     </nav>
   );

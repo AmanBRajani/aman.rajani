@@ -9,10 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@heroicons/react": "^2.2.0",
     "@netlify/plugin-nextjs": "^5.11.2",
     "@shadcn/ui": "^0.0.4",
     "autoprefixer": "^10.4.21",
+    "browser": "^0.2.6",
+    "emailjs": "^4.0.3",
     "framer-motion": "^12.20.1",
     "lottie-react": "^2.4.1",
     "next": "15.3.3",
