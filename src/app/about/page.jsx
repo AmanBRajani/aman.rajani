@@ -25,9 +25,9 @@ export default function About() {
 				{/* Right: Image */}
 				<div className="flex-1 flex justify-center items-center">
 					<img
-						src="/aman.jpg"
+						src="/aman-rajani.jpg"
 						alt="Aman Rajani"
-						className="w-72 h-72 md:w-96 md:h-96 object-cover rounded-3xl border-4 border-pink-400 shadow-2xl bg-white/10"
+						className="w-64 h-64 md:w-[500px] md:h-[500px] object-cover rounded-3xl border-4 border-pink-400 shadow-2xl bg-white/10"
 					/>
 				</div>
 			</div>

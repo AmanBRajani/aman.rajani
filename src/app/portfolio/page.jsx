@@ -1,10 +1,10 @@
 // Portfolio Page (React + TailwindCSS, no Framer Motion)
 'use client';
-import { useState } from 'react';
 import dynamic from 'next/dynamic';
 const PDFPreview = dynamic(() => import('../../components/PDFPreview'), { ssr: false });
 
 const certificates = [
+  { src: '/indus_certifcate.jpg', title: 'Indus Certificate', year: '2024' },
   { src: '/certificates/cert1.jpg', title: 'AI Specialist', year: '2024' },
   { src: '/certificates/cert2.jpg', title: 'Web Dev Pro', year: '2023' },
   { src: '/certificates/cert3.jpg', title: 'Python Expert', year: '2023' },
@@ -12,7 +12,6 @@ const certificates = [
 ];
 
 export default function Portfolio() {
-  const [numPages, setNumPages] = useState(null);
   return (
     <main className="max-w-5xl mx-auto py-16 px-4 md:px-8 w-full">
       <div className="mb-12 text-center">
@@ -27,7 +26,7 @@ export default function Portfolio() {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
         {certificates.map((cert) => (
           <div key={cert.title} className="rounded-xl overflow-hidden border border-pink-400/20 bg-white/5 shadow-lg hover:scale-105 transition-transform duration-300 cursor-pointer group">
-            <img src={cert.src} alt={cert.title} className="w-full h-32 object-cover group-hover:brightness-110 group-hover:blur-[1px] transition duration-300" />
+            <img src={cert.src} alt={cert.title} />
             <div className="p-2 text-center">
               <div className="font-semibold text-pink-400 text-sm">{cert.title}</div>
               <div className="text-xs text-gray-400">{cert.year}</div>
