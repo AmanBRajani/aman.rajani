@@ -1,12 +1,29 @@
 // PDFPreview.jsx
 'use client';
-import { Document, Page, pdfjs } from 'react-pdf';
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+import { useEffect, useState } from 'react';
 
 export default function PDFPreview({ file }) {
+  const [pdfUrl, setPdfUrl] = useState(null);
+
+  useEffect(() => {
+    // Convert the PDF file to a blob URL if it's a local file
+    if (file instanceof File) {
+      const url = URL.createObjectURL(file);
+      setPdfUrl(url);
+      return () => URL.revokeObjectURL(url);
+    } else {
+      setPdfUrl(file);
+    }
+  }, [file]);
+
+  if (!pdfUrl) return <div className="text-gray-400 text-center">Loading preview…</div>;
+
   return (
-    <Document file={file} className="border rounded overflow-hidden">
-      <Page pageNumber={1} width={400} />
-    </Document>
+    <iframe
+      src={pdfUrl}
+      title="PDF Preview"
+      className="w-full h-[600px] border rounded shadow-lg bg-white"
+      style={{ minHeight: 400 }}
+    />
   );
 }
