@@ -1,8 +1,8 @@
 // Portfolio Page (React + TailwindCSS, no Framer Motion)
 'use client';
 import { useState } from 'react';
-import { Document, Page, pdfjs } from 'react-pdf';
-pdfjs.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.js';
+import dynamic from 'next/dynamic';
+const PDFPreview = dynamic(() => import('../../components/PDFPreview'), { ssr: false });
 
 const certificates = [
   { src: '/certificates/cert1.jpg', title: 'AI Specialist', year: '2024' },
@@ -20,9 +20,7 @@ export default function Portfolio() {
         <p className="mb-2 text-lg text-gray-300">View and download my resume and certificates below.</p>
       </div>
       <div className="bg-white/5 rounded-2xl p-8 shadow-xl border border-pink-400/20 flex flex-col items-center mb-12">
-        <Document file="/AmanRajani_Resume.pdf" onLoadSuccess={({ numPages }) => setNumPages(numPages)} className="w-full flex flex-col items-center">
-          <Page pageNumber={1} width={600} />
-        </Document>
+        <PDFPreview />
         <a href="/AmanRajani_Resume.pdf" download className="mt-6 px-6 py-3 rounded-lg bg-gradient-to-r from-orange-400 to-pink-500 text-white font-semibold shadow-lg hover:scale-105 hover:shadow-pink-400/40 transition-transform duration-200 focus:outline-none focus:ring-2 focus:ring-pink-400">Download PDF</a>
       </div>
       <div className="mb-8 text-2xl font-bold text-pink-400">Certificates</div>
