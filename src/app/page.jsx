@@ -1,7 +1,12 @@
 // src/app/page.jsx
 
-import Dashboard from './dashboard/page';
+import Hero from '../components/Hero';
 
 export default function Home() {
-  return <Dashboard />;
+  return (
+    <main>
+      <Hero />
+      {/* Add more animated/section components here as you build out the site */}
+    </main>
+  );
 }
