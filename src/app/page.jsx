@@ -10,10 +10,20 @@ import Hero from '../components/Hero';
 import CertificatesStrip from '../components/CertificatesStrip';
 
 const certificates = [
-	{ src: '/certificates/cert1.jpg', title: 'AI Specialist', year: '2024' },
-	{ src: '/certificates/cert2.jpg', title: 'Web Dev Pro', year: '2023' },
-	{ src: '/certificates/cert3.jpg', title: 'Python Expert', year: '2023' },
-	{ src: '/certificates/cert4.jpg', title: 'LLM Innovator', year: '2024' },
+	{
+		src: '/indus_certifcate.jpg',
+		title: 'Web Application Development and Security',
+		description:
+			'A comprehensive certification from Indus University covering secure web application development practices, including authentication, authorization, and modern security protocols. Awarded for excellence in both theory and practical implementation.',
+		// year: '2024',
+	},
+	{
+		src: 'https://udemy-certificate.s3.amazonaws.com/image/UC-e45b8d49-e40e-4228-9e62-895b09515d90.jpg',
+		title: 'Web Development Masterclass',
+		description:
+			'Certification from Udemy for completing an advanced masterclass in web development, focusing on full-stack technologies, responsive design, and deployment best practices.',
+		// year: '2023',
+	},
 ];
 
 export default function Home() {
