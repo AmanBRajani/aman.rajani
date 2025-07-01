@@ -3,9 +3,9 @@
 
 export default function CertificatesStrip({ certificates }) {
   return (
-    <section className="w-full max-w-[1440px] mx-auto mt-20 px-4 md:px-12">
+    <section className="w-full max-w-[1440px] mx-auto mt-8 px-4 md:px-12">
       <h2 className="text-xl md:text-2xl font-bold mb-6 text-pink-400 flex items-center gap-2">
-        <span role="img" aria-label="cert">🎓</span> Certificates
+        {/* <span role="img" aria-label="cert">🎓</span> Certificates */}
       </h2>
       <div className="flex gap-8 overflow-x-auto pb-4 hide-scrollbar">
         {certificates.map((cert) => (

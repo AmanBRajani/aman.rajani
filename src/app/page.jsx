@@ -41,26 +41,26 @@ export default function Home() {
 				</svg>
 			</div>
 			<Hero />
-			<section className="mt-24">
+			<section className="mt-12">
 				<About />
 			</section>
-			<section className="mt-24">
+			<section className="mt-12">
 				<Projects />
 			</section>
 			{/* Portfolio download section */}
 			<section className="mt-24 flex flex-col items-center">
-				<div className="relative rounded-2xl bg-gradient-to-br from-white/5 to-pink-200/5 p-8 md:p-12 shadow-2xl border border-pink-400/40 flex flex-col items-center overflow-hidden max-w-3xl w-full">
+				<div className="relative rounded-2xl bg-gradient-to-br from-blue-400/10 via-pink-400/10 to-white/0 p-8 md:p-12 shadow-2xl border border-blue-400/40 flex flex-col items-center overflow-hidden max-w-3xl w-full">
 					<div
 						className="absolute -inset-1 rounded-2xl pointer-events-none"
 						style={{
 							boxShadow:
-								'0 0 24px 2px #ff8a0033, 0 0 0 2px #e52e71, 0 0 0 8px #fff2',
+								'0 0 24px 2px #60a5fa33, 0 0 0 2px #e52e71, 0 0 0 8px #fff2',
 						}}
 					/>
-					<h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-orange-400 to-pink-600 bg-clip-text text-transparent">
+					<h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-400 via-pink-400 to-orange-400 bg-clip-text text-transparent text-center">
 						🖼️ Portfolio
 					</h1>
-					<p className="mb-8 text-lg text-gray-300">
+					<p className="mb-8 text-lg text-gray-300 text-center">
 						🧾 Work Samples & Case Studies
 						<br />
 						Download my resume and other work samples below.
@@ -68,15 +68,31 @@ export default function Home() {
 					<a
 						href="/AmanRajani_Resume.pdf"
 						download
-						className="underline text-blue-400 mt-2 text-xl font-semibold bg-white/10 px-6 py-3 rounded-lg shadow hover:bg-pink-400/20 transition"
+						className="underline text-blue-400 mt-2 text-xl font-semibold bg-white/10 px-6 py-3 rounded-lg shadow hover:bg-pink-400/20 transition text-center"
 					>
 						Download Resume (PDF)
 					</a>
 				</div>
 			</section>
 			{/* Certificates Strip */}
-			<CertificatesStrip certificates={certificates} />
-			<section className="mt-24">
+			<section className="w-full flex flex-col items-center mt-24 mb-12">
+				<div className="relative rounded-2xl bg-gradient-to-br from-blue-400/10 via-pink-400/10 to-white/0 p-8 md:p-12 shadow-2xl border border-blue-400/40 flex flex-col items-center overflow-hidden max-w-5xl w-full">
+					<div
+						className="absolute -inset-1 rounded-2xl pointer-events-none"
+						style={{
+							boxShadow:
+								'0 0 24px 2px #60a5fa33, 0 0 0 2px #e52e71, 0 0 0 8px #fff2',
+						}}
+					/>
+					<h1 className="text-4xl font-bold bg-gradient-to-r from-blue-400 via-pink-400 to-orange-400 bg-clip-text text-transparent text-center">
+						Certificates
+					</h1>
+					<div className="w-full">
+						<CertificatesStrip certificates={certificates} />
+					</div>
+				</div>
+			</section>
+			<section className="mt-12">
 				<Contact />
 			</section>
 		</main>

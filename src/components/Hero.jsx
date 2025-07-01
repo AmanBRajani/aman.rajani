@@ -33,9 +33,9 @@ export default function Hero() {
           />
         </div>
         <div className="flex gap-6 mt-6">
-          <Link href="/resume/Aman-Rajani.pdf" target="_blank" className="px-6 py-3 rounded-lg bg-gradient-to-r from-orange-400 to-pink-500 text-white font-bold shadow-lg hover:scale-105 hover:shadow-pink-400/40 transition-transform duration-200">
+          <a href="/AmanRajani_Resume.pdf" download className="px-6 py-3 rounded-lg bg-gradient-to-r from-orange-400 to-pink-500 text-white font-bold shadow-lg hover:scale-105 hover:shadow-pink-400/40 transition-transform duration-200">
             📄 Download Resume
-          </Link>
+          </a>
           <a href="#contact" className="px-6 py-3 rounded-lg border-2 border-pink-400 text-pink-400 font-bold hover:bg-pink-400 hover:text-white transition-colors duration-200">
             📬 Contact Me
           </a>
