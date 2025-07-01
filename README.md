@@ -13,9 +13,8 @@ This site is more than just a portfolio — it’s a personal brand, a resume, a
 ## ✨ Features
 
 - 🎯 Fully Responsive Design (Desktop → Mobile)
-- 🌗 Light/Dark Mode Toggle with LocalStorage
-- 🔍 Scroll-based Animations (No Framer Motion)
-- 🖼️ Resume PDF Preview + Download
+- 🔍 Scroll-based Animations
+- 🖼️ Resume PDF Download
 - 📜 Projects Section with Live + GitHub Links
 - 📥 Contact Form Powered by EmailJS
 - 🧾 Certificate Gallery
