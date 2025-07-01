@@ -11,7 +11,12 @@ export default function Contact() {
     e.preventDefault();
     setSending(true);
     setToast(null);
-    emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', form.current, 'YOUR_PUBLIC_KEY')
+    emailjs.sendForm(
+      import.meta.env.VITE_EMAILJS_SERVICE_ID,
+      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+      form.current,
+      import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+    )
       .then(() => {
         setSending(false);
         setToast({ type: 'success', message: 'Message sent successfully!' });
