@@ -12,6 +12,10 @@ export default function Contact() {
     e.preventDefault();
     setSending(true);
     setToast(null);
+    const formEl = form.current;
+    const userName = formEl['user_name'].value;
+    const userEmail = formEl['user_email'].value;
+    // Send to Aman (yourself)
     emailjs.sendForm(
       process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
       process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
@@ -19,6 +23,18 @@ export default function Contact() {
       process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
     )
       .then(() => {
+        // Send auto-reply to user
+        emailjs.send(
+          process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+          process.env.NEXT_PUBLIC_EMAILJS_REPLY_TEMPLATE_ID, // <-- create this template in EmailJS
+          {
+            to_email: userEmail,
+            to_name: userName,
+            reply_subject: 'Thanks for reaching out to Aman 🚀',
+            reply_message: `Hey ${userName},\n\nThanks a ton for reaching out! 🙌  \nI’ve received your message and I’ll be reviewing it shortly. You can expect a response from me within 24 hours — usually much sooner.\n\nWhether it’s about collaborating, hiring, or just a cool opportunity, I’m genuinely looking forward to connecting with you!\n\nIf it’s something urgent, feel free to WhatsApp or call me directly at:\n📞 +91-9825168321\n\nTalk soon ✨  \n— Aman Rajani  \nAI & Web Developer`,
+          },
+          process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+        );
         setSending(false);
         setToast({ type: 'success', message: 'Message sent successfully!' });
         form.current.reset();

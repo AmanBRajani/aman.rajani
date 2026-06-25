@@ -14,6 +14,7 @@ export default function Navbar() {
     { name: 'About', href: '/about' },
     { name: 'Projects', href: '/projects' },
     { name: 'Portfolio', href: '/portfolio' },
+    { name: 'Experience', href: '/experience' },
     { name: 'Contact', href: '/contact' },
   ];
   return (
