@@ -1,56 +1,155 @@
-// Hero.jsx
-import { Typewriter } from 'react-simple-typewriter';
+'use client';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 
 export default function Hero() {
+  const heroRef = useRef(null);
+  const rawX = useMotionValue(0);
+  const rawY = useMotionValue(0);
+  const x = useSpring(rawX, { stiffness: 120, damping: 28 });
+  const y = useSpring(rawY, { stiffness: 120, damping: 28 });
+
+  useEffect(() => {
+    const el = heroRef.current;
+    if (!el) return;
+    const move = (e) => {
+      const rect = el.getBoundingClientRect();
+      rawX.set(e.clientX - rect.left);
+      rawY.set(e.clientY - rect.top);
+    };
+    el.addEventListener('mousemove', move);
+    return () => el.removeEventListener('mousemove', move);
+  }, [rawX, rawY]);
+
   return (
-    <section className="w-full flex flex-col md:flex-row items-center justify-between gap-12 py-24 px-4 md:px-12 max-w-[1440px] mx-auto relative">
-      {/* Hero Image (Vector) on the left */}
-      <div className="z-10 flex-1 flex justify-center items-center order-1 md:order-none">
-        <img
-          src="/vector.svg"
-          alt="Vector"
-          className="w-96 h-96 md:w-[32rem] md:h-[32rem] object-contain rounded-3xl border-4 border-pink-400 shadow-2xl bg-white/10"
+    <section
+      ref={heroRef}
+      className="relative min-h-screen flex flex-col justify-end overflow-hidden px-6 md:px-16 pb-16 md:pb-24"
+    >
+      {/* Cursor spotlight */}
+      <motion.div
+        className="absolute pointer-events-none rounded-full"
+        style={{
+          width: 700,
+          height: 700,
+          background:
+            'radial-gradient(circle, rgba(37,99,235,0.10) 0%, transparent 65%)',
+          x,
+          y,
+          translateX: '-50%',
+          translateY: '-50%',
+        }}
+      />
+
+      {/* Subtle grid */}
+      <div className="absolute inset-0 bg-grid opacity-25 pointer-events-none" />
+
+      {/* Top metadata */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.2, delay: 0.3 }}
+        className="absolute top-8 left-6 md:left-16 right-6 md:right-16 flex justify-between items-center"
+      >
+        <span className="text-gray-600 text-[11px] uppercase tracking-[0.22em]">
+          Ahmedabad · Jamnagar
+        </span>
+        <span className="text-gray-700 text-[11px] uppercase tracking-[0.22em]">
+          Est. 2022
+        </span>
+      </motion.div>
+
+      {/* Name — the centrepiece */}
+      <div className="relative z-10 w-full">
+        <div className="mb-4 md:mb-5">
+          {['AMAN', 'RAJANI'].map((word, i) => (
+            <div key={word} className="overflow-hidden leading-[0.86]">
+              <motion.div
+                initial={{ y: '110%' }}
+                animate={{ y: '0%' }}
+                transition={{
+                  duration: 1.05,
+                  delay: 0.08 + i * 0.12,
+                  ease: [0.33, 1, 0.68, 1],
+                }}
+                className="text-[19vw] sm:text-[17vw] md:text-[14vw] font-black text-white tracking-tighter select-none"
+              >
+                {word}
+              </motion.div>
+            </div>
+          ))}
+        </div>
+
+        {/* Animated rule */}
+        <motion.div
+          className="h-px bg-white/12 mb-8 md:mb-10"
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          style={{ originX: 0 }}
+          transition={{ duration: 1.5, delay: 0.42, ease: [0.33, 1, 0.68, 1] }}
         />
-      </div>
-      {/* Hero Content */}
-      <div className="z-10 flex-1 flex flex-col items-start gap-8 order-2 md:order-none">
-        <h1 className="text-4xl md:text-6xl font-extrabold leading-tight bg-gradient-to-r from-orange-400 to-pink-600 bg-clip-text text-transparent flex items-center gap-4">
-          {/* Vector SVG on the left of the heading */}
-          {/* <img src="/vector.svg" alt="Vector" className="w-12 h-12 md:w-16 md:h-16 inline-block" />  */}
-          I Build AI Powered Tools & Intelligent Web Experiences
-        </h1>
-        <div className="text-2xl md:text-3xl font-semibold text-gray-200 flex items-center gap-2">
-          <span className="text-pink-400">{'>'}</span>
-          <Typewriter
-            words={['AI Developer', 'Web Engineer', 'Creative Technologist']}
-            loop={0}
-            cursor
-            cursorStyle="_"
-            typeSpeed={70}
-            deleteSpeed={50}
-            delaySpeed={1200}
-          />
-        </div>
-        <div className="flex gap-6 mt-6">
-          <a href="/AmanRajani_Resume.pdf" download className="px-6 py-3 rounded-lg bg-gradient-to-r from-orange-400 to-pink-500 text-white font-bold shadow-lg hover:scale-105 hover:shadow-pink-400/40 transition-transform duration-200">
-            📄 Download Resume
-          </a>
-          <a href="#contact" className="px-6 py-3 rounded-lg border-2 border-pink-400 text-pink-400 font-bold hover:bg-pink-400 hover:text-white transition-colors duration-200">
-            📬 Contact Me
-          </a>
-        </div>
-      </div>
-      {/* Background grid lines */}
-      <div className="absolute inset-0 pointer-events-none z-0">
-        <svg width="100%" height="100%" className="h-full w-full opacity-10">
-          <defs>
-            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#fff" strokeWidth="0.5" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#grid)" />
-        </svg>
+
+        {/* Bottom bar */}
+        <motion.div
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.95 }}
+          className="flex flex-col md:flex-row md:items-end justify-between gap-5 md:gap-8"
+        >
+          {/* Tagline */}
+          <div>
+            <p className="text-gray-300 text-lg md:text-xl font-light leading-relaxed max-w-[300px]">
+              Building Businesses Through<br />
+              Innovation, Creativity &amp; Growth
+            </p>
+            <p className="text-gray-600 text-xs mt-3 tracking-widest uppercase">
+              Founder · Veolve Tech · Voya Marketing · Kartos Designz
+            </p>
+          </div>
+
+          {/* Stats */}
+          <div className="flex gap-8 md:gap-14">
+            {[
+              { value: '3',   label: 'Ventures' },
+              { value: '50+', label: 'Projects'  },
+              { value: '3+',  label: 'Years'     },
+            ].map((s) => (
+              <div key={s.label}>
+                <div className="text-2xl md:text-3xl font-black text-white tabular-nums">
+                  {s.value}
+                </div>
+                <div className="text-gray-600 text-[10px] uppercase tracking-[0.18em] mt-0.5">
+                  {s.label}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* CTAs */}
+          <div className="flex gap-6 items-center">
+            <Link
+              href="/projects"
+              className="group flex items-center gap-2 text-white text-sm"
+            >
+              <span className="border-b border-white/25 pb-0.5 group-hover:border-white/70 transition-colors duration-300">
+                Explore Ventures
+              </span>
+              <span className="text-blue-400 group-hover:translate-x-1 transition-transform duration-200">
+                ↗
+              </span>
+            </Link>
+            <Link
+              href="/contact"
+              className="group flex items-center gap-2 text-gray-500 hover:text-gray-300 text-sm transition-colors duration-200"
+            >
+              <span>Contact</span>
+              <span className="group-hover:translate-x-1 transition-transform duration-200">
+                →
+              </span>
+            </Link>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

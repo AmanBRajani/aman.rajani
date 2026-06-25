@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0a0a23;
-  --foreground: #ededed;
+  --background: #000000;
+  --foreground: #ffffff;
 }
 
 @theme inline {
@@ -12,16 +12,79 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 body {
-  background: #0a0a23;
-  color: #fff;
-  transition: background 0.3s, color 0.3s;
+  background: #000000;
+  color: #ffffff;
 }
 
 html {
   scroll-behavior: smooth;
 }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: #000; }
+::-webkit-scrollbar-thumb { background: #1d4ed8; border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: #3B82F6; }
+
+/* ─── Background Grid ─── */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 72px 72px;
+}
+
+/* ─── Card hover — kept for the loader, used sparingly elsewhere ─── */
+.card-hover {
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.02);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-hover:hover {
+  border-color: rgba(59, 130, 246, 0.25);
+  box-shadow: 0 0 32px rgba(37, 99, 235, 0.08), 0 6px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* ─── Gradient text — used sparingly ─── */
+.text-blue-gradient {
+  background: linear-gradient(135deg, #93C5FD 0%, #3B82F6 50%, #1D4ED8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Section label — reserved for loader / special use ─── */
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  background: rgba(37, 99, 235, 0.08);
+  border: 1px solid rgba(59, 130, 246, 0.18);
+  color: #60A5FA;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+/* ─── Keyframes ─── */
+
+@keyframes blob {
+  0%, 100% { transform: translate(0px, 0px) scale(1); }
+  33%       { transform: translate(40px, -60px) scale(1.1); }
+  66%       { transform: translate(-30px, 30px) scale(0.9); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+.animate-blob { animation: blob 12s ease-in-out infinite; }
+.delay-2000   { animation-delay: 2s; }
+.delay-3000   { animation-delay: 3s; }
+.delay-6000   { animation-delay: 6s; }

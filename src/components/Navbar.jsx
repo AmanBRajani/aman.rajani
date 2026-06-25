@@ -1,72 +1,134 @@
-// Navbar.jsx
 'use client';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { motion } from 'framer-motion';
-// import ThemeToggle from './ThemeToggle';
-import { useState } from 'react';
+import { useRouter, usePathname } from 'next/navigation';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect } from 'react';
+
+const navLinks = [
+  { name: 'Home',     href: '/'           },
+  { name: 'About',    href: '/about'      },
+  { name: 'Ventures', href: '/projects'   },
+  { name: 'Journey',  href: '/experience' },
+  { name: 'Contact',  href: '/contact'    },
+];
 
 export default function Navbar() {
-  const router = useRouter();
+  const router   = useRouter();
+  const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
-  const navLinks = [
-    { name: 'Home', href: '/' },
-    { name: 'About', href: '/about' },
-    { name: 'Projects', href: '/projects' },
-    { name: 'Portfolio', href: '/portfolio' },
-    { name: 'Experience', href: '/experience' },
-    { name: 'Contact', href: '/contact' },
-  ];
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   return (
-    <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur flex justify-between items-center px-4 md:px-8 py-4 shadow-lg border-b border-white/10">
-      <motion.div
-        whileHover={{ scale: 1.08, rotate: -2 }}
-        whileTap={{ scale: 0.96, rotate: 2 }}
-        className="font-extrabold text-2xl cursor-pointer bg-gradient-to-r from-orange-400 to-pink-600 bg-clip-text text-transparent select-none"
-        onClick={() => router.push('/')}
-        transition={{ type: 'spring', stiffness: 300 }}
-      >
-        AMAN RAJANI
-      </motion.div>
-      {/* Hamburger for mobile */}
-      <button
-        className="md:hidden flex flex-col justify-center items-center w-10 h-10 rounded focus:outline-none focus:ring-2 focus:ring-pink-400"
-        onClick={() => setMenuOpen((v) => !v)}
-        aria-label="Toggle navigation menu"
-      >
-        <span className={`block w-6 h-0.5 bg-pink-500 mb-1 transition-transform duration-300 ${menuOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
-        <span className={`block w-6 h-0.5 bg-pink-500 mb-1 transition-opacity duration-300 ${menuOpen ? 'opacity-0' : ''}`}></span>
-        <span className={`block w-6 h-0.5 bg-pink-500 transition-transform duration-300 ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
-      </button>
-      {/* Desktop nav */}
-      <div className="space-x-4 md:space-x-8 items-center hidden md:flex">
-        {navLinks.map((link, idx) => (
-          <div key={link.name} className="inline-block">
-            <Link
-              href={link.href}
-              className="px-4 py-2 rounded-lg font-semibold text-lg transition-colors duration-200 hover:bg-gradient-to-r hover:from-orange-400 hover:to-pink-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-pink-400"
-            >
-              {link.name}
-            </Link>
-          </div>
-        ))}
-        {/* <ThemeToggle /> */}
-      </div>
-      {/* Mobile nav */}
-      {menuOpen && (
-        <div className="absolute top-full left-0 w-full bg-background/95 backdrop-blur-lg flex flex-col items-center py-4 shadow-lg border-b border-pink-400/20 md:hidden animate-fade-in z-40">
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              className="block w-full text-center px-6 py-3 rounded-lg font-semibold text-lg text-pink-500 hover:bg-gradient-to-r hover:from-orange-400 hover:to-pink-600 hover:text-white transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-pink-400"
-              onClick={() => setMenuOpen(false)}
-            >
-              {link.name}
-            </Link>
-          ))}
+    <nav
+      className={`sticky top-0 z-50 transition-all duration-500 ${
+        scrolled
+          ? 'bg-black/95 border-b border-white/[0.05] shadow-xl shadow-black/40'
+          : 'bg-transparent'
+      } backdrop-blur-xl`}
+    >
+      <div className="max-w-7xl mx-auto px-6 md:px-16 py-5 flex justify-between items-center">
+
+        {/* Logo */}
+        <div
+          className="font-black text-base tracking-tight cursor-pointer select-none"
+          onClick={() => router.push('/')}
+        >
+          <span className="text-white">AMAN</span>
+          <span className="text-blue-500">.</span>
+          <span className="text-white">RAJANI</span>
         </div>
-      )}
+
+        {/* Desktop links */}
+        <div className="hidden md:flex items-center gap-8">
+          {navLinks.map((link) => {
+            const active = pathname === link.href;
+            return (
+              <Link
+                key={link.name}
+                href={link.href}
+                className={`relative text-sm transition-colors duration-200 py-1 ${
+                  active ? 'text-white' : 'text-gray-500 hover:text-white'
+                }`}
+              >
+                {link.name}
+                {active && (
+                  <motion.span
+                    layoutId="nav-indicator"
+                    className="absolute -bottom-0.5 left-0 right-0 h-px bg-blue-500"
+                    transition={{ type: 'spring', stiffness: 400, damping: 32 }}
+                  />
+                )}
+              </Link>
+            );
+          })}
+        </div>
+
+        {/* Hamburger */}
+        <button
+          className="md:hidden w-11 h-11 flex flex-col justify-center items-center gap-[5px] -mr-1"
+          onClick={() => setMenuOpen((v) => !v)}
+          aria-label="Toggle menu"
+        >
+          <span
+            className={`block w-5 h-[1.5px] bg-white transition-all duration-300 ${
+              menuOpen ? 'rotate-45 translate-y-[6.5px]' : ''
+            }`}
+          />
+          <span
+            className={`block w-5 h-[1.5px] bg-white transition-all duration-300 ${
+              menuOpen ? 'opacity-0 scale-x-0' : ''
+            }`}
+          />
+          <span
+            className={`block w-5 h-[1.5px] bg-white transition-all duration-300 ${
+              menuOpen ? '-rotate-45 -translate-y-[6.5px]' : ''
+            }`}
+          />
+        </button>
+      </div>
+
+      {/* Mobile menu */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.2 }}
+            className="md:hidden overflow-hidden border-t border-white/[0.05] bg-black/98 backdrop-blur-xl"
+          >
+            <div className="px-6 py-4 flex flex-col">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className={`py-3.5 text-sm transition-colors duration-200 border-b border-white/[0.04] ${
+                    pathname === link.href ? 'text-white' : 'text-gray-500'
+                  }`}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {link.name}
+                </Link>
+              ))}
+              <div className="pt-5">
+                <a
+                  href="tel:+919428823321"
+                  className="text-gray-600 text-sm py-2 block"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  +91 94288 23321
+                </a>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }

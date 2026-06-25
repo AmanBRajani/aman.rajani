@@ -1,131 +1,251 @@
 'use client';
 
-/** Projects Page (React + TailwindCSS, no Framer Motion) */
+import { motion } from 'framer-motion';
+import Link from 'next/link';
 
-import Head from 'next/head';
-
-const projects = [
-	{
-		title: 'Episcan',
-		description:
-			'AI-based facial skin analysis and product recommendation platform.',
-		tech: ['YOLOv8', 'FastAPI', 'Next.js', 'Python'],
-		image: '/episcan.jpeg', // updated to actual image in public/
-		github: 'https://github.com/AmanBRajani/Episcan-AI-Models',
-		live: 'https://epi-scan.vercel.app/',
-		color: 'from-pink-400 to-pink-600',
-	},
-	{
-		title: 'Portfolio Website',
-		description:
-			'This website: clean structure, CSS animations, responsive, modern design.',
-		tech: ['React', 'TailwindCSS', 'Next.js'],
-		image: '/portfolio.png', // fixed to actual image in public/
-		github: 'https://github.com/AmanBRajani/aman.rajani',
-		live: 'https://aman-rajani.vercel.app/',
-		color: 'from-orange-400 to-pink-500',
-	},
+const ventures = [
+  {
+    number: '01',
+    name: 'Veolve Tech',
+    category: 'IT & AI Company',
+    role: 'Founder',
+    founded: 'Nov 2025',
+    tagline: 'Streamline. Automate. Scale.',
+    description:
+      'A technology company helping businesses streamline their operations, automate repetitive workflows, and scale faster through custom software development, AI-powered solutions, and end-to-end digital transformation services.',
+    services: [
+      'Custom Software Development',
+      'AI & Automation Solutions',
+      'ERP & Business Systems',
+      'Web & App Development',
+      'Digital Transformation',
+      'Technology Consulting',
+    ],
+    highlight: 'Built an ERP system for the brass industry and delivered a full website for a USA-based restaurant client.',
+    contact: {
+      phone: '+91 94288 23321',
+      email: 'aman@veolve.com',
+      website: 'https://veolve.com',
+      websiteLabel: 'veolve.com',
+    },
+    stats: ['5+ Team', '10+ Clients', '15+ Projects'],
+  },
+  {
+    number: '02',
+    name: 'Voya Marketing',
+    category: 'Marketing Agency',
+    role: 'Founding Partner & CEO',
+    founded: 'Jul 2025',
+    tagline: 'Growth-Driven Marketing. Real Results.',
+    description:
+      'A full-service digital marketing agency focused on driving measurable business growth through social media management, performance advertising, SEO, and compelling content.',
+    services: [
+      'Social Media Management',
+      'Performance Advertising',
+      'Search Engine Optimisation',
+      'Content Marketing',
+      'Brand Growth Strategy',
+      'Influencer & Creator Campaigns',
+    ],
+    highlight: 'Scaled a client\'s revenue to 5x within 3 months. Worked with Hari Om Kanthiyawadi and other renowned Ahmedabad brands.',
+    contact: {
+      phone: '+91 89808 03321',
+      email: 'info@voyamarketing.in',
+      website: 'https://voyamarketing.in',
+      websiteLabel: 'voyamarketing.in',
+    },
+    stats: ['5x Revenue Growth', 'CEO'],
+  },
+  {
+    number: '03',
+    name: 'Kartos Designz',
+    category: 'Design Studio',
+    role: 'Founding Partner & CEO',
+    founded: 'Nov 2022',
+    tagline: 'Building Brands That Stand Out.',
+    description:
+      'A premium design studio helping businesses craft strong, memorable identities. From brand strategy and logo design to UI/UX, social media creatives, and print collateral — design that communicates value and builds trust.',
+    services: [
+      'Brand Identity & Logo Design',
+      'UI/UX Design',
+      'Social Media Creatives',
+      'Print & Collateral',
+      'Brand Strategy',
+      'Visual Communication',
+    ],
+    contact: {
+      phone: '+91 94288 23321',
+      email: 'info@kartosdesignz.in',
+      website: 'https://kartosdesignz.in',
+      websiteLabel: 'kartosdesignz.in',
+    },
+    stats: ['25+ Projects'],
+  },
 ];
 
-export default function Projects() {
-	return (
-		<>
-			<Head>
-				<title>Aman Rajani | Projects</title>
-			</Head>
-			<main className="max-w-6xl mx-auto py-16 px-4 md:px-8 w-full">
-				<div className="mb-12 text-center">
-					<h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-orange-400 to-pink-600 bg-clip-text text-transparent">
-						🧠 Projects
-					</h1>
-					<p className="mb-2 text-lg text-gray-300">💡 Featured Projects</p>
-					<p className="text-gray-400">
-						Here’s a glimpse of my favorite AI & web builds—crafted with intent,
-						creativity, and code.
-					</p>
-				</div>
-				<div className="grid md:grid-cols-2 gap-10">
-					{projects.map((proj, idx) => (
-						<div
-							key={proj.title}
-							className={`group bg-gradient-to-br ${proj.color} rounded-3xl p-8 shadow-2xl border border-white/10 flex flex-col items-start hover:scale-105 hover:shadow-xl transition-transform duration-300 relative overflow-hidden cursor-pointer`}
-							style={{ minHeight: 340 }}
-							onClick={() => (window.location.href = `/projects/${idx}`)}
-							tabIndex={0}
-							role="button"
-							aria-label={`View details for ${proj.title}`}
-							onKeyDown={(e) => {
-								if (e.key === 'Enter' || e.key === ' ')
-									window.location.href = `/projects/${idx}`;
-							}}
-						>
-							<div className="w-full h-56 md:h-64 mb-6 rounded-xl overflow-hidden bg-gray-900/20 flex items-center justify-center">
-								<img
-									src={proj.image}
-									alt={proj.title}
-									className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
-								/>
-							</div>
-							<h2 className="text-2xl font-bold mb-2 text-white drop-shadow-lg">
-								{proj.title}
-							</h2>
-							<p className="mb-3 text-gray-200">{proj.description}</p>
-							<div className="flex flex-wrap gap-2 mb-4">
-								{proj.tech.map((t) => (
-									<span
-										key={t}
-										className="px-3 py-1 rounded-full bg-pink-500/20 text-xs font-semibold text-pink-100 border border-pink-400/60 shadow-sm backdrop-blur-sm hover:bg-pink-500/40 transition-colors duration-200"
-									>
-										{t}
-									</span>
-								))}
-							</div>
-							<div className="flex gap-4 mt-auto">
-								<a
-									href={proj.live}
-									target="_blank"
-									rel="noopener"
-									className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white text-pink-600 font-semibold shadow hover:scale-105 hover:shadow-pink-400/40 transition-transform duration-200 focus:outline-none focus:ring-2 focus:ring-pink-400 border border-pink-400"
-									onClick={(e) => e.stopPropagation()}
-								>
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										fill="none"
-										viewBox="0 0 24 24"
-										strokeWidth={1.5}
-										stroke="currentColor"
-										className="w-5 h-5"
-									>
-										<path
-											strokeLinecap="round"
-											strokeLinejoin="round"
-											d="M13.5 6H18.75V18.75H6V13.5M18.75 6L6 18.75"
-										/>
-									</svg>
-									Live Demo
-								</a>
-								<a
-									href={proj.github}
-									target="_blank"
-									rel="noopener"
-									className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-gray-700 to-gray-900 text-white font-semibold shadow hover:scale-105 hover:shadow-orange-400/40 transition-transform duration-200 focus:outline-none focus:ring-2 focus:ring-orange-400"
-									onClick={(e) => e.stopPropagation()}
-								>
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										fill="currentColor"
-										viewBox="0 0 24 24"
-										className="w-5 h-5"
-									>
-										<path d="M12 2C6.477 2 2 6.484 2 12.021c0 4.428 2.865 8.184 6.839 9.504.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.004.07 1.532 1.032 1.532 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.339-2.221-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.987 1.029-2.686-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.025A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.295 2.748-1.025 2.748-1.025.546 1.378.202 2.397.1 2.65.64.699 1.028 1.593 1.028 2.686 0 3.847-2.337 4.695-4.566 4.944.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.749 0 .267.18.577.688.479C19.138 20.2 22 16.447 22 12.021 22 6.484 17.523 2 12 2z" />
-									</svg>
-									GitHub
-								</a>
-							</div>
-						</div>
-					))}
-				</div>
-			</main>
-		</>
-	);
+export default function Ventures() {
+  return (
+    <main className="bg-black min-h-screen">
+      <div className="max-w-6xl mx-auto px-6 md:px-16 pt-20 md:pt-28 pb-24 md:pb-36">
+
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="mb-20 md:mb-28"
+        >
+          <p className="text-gray-600 text-[11px] uppercase tracking-[0.22em] mb-6">
+            Entrepreneurship
+          </p>
+          <h1 className="text-5xl md:text-7xl font-black text-white tracking-tight leading-none mb-6">
+            My Ventures
+          </h1>
+          <p className="text-gray-500 max-w-md text-base leading-relaxed">
+            Three companies. Three disciplines. One mission — to help businesses grow.
+          </p>
+        </motion.div>
+
+        {/* Venture rows */}
+        {ventures.map((v, idx) => (
+          <motion.div
+            key={v.name}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.1 }}
+            transition={{ duration: 0.65, delay: idx * 0.08, ease: [0.22, 1, 0.36, 1] }}
+            className="border-t border-white/[0.07] py-12 md:py-16"
+          >
+            {/* Top row */}
+            <div className="flex items-start gap-5 md:gap-6 mb-8">
+              <span className="text-gray-700 text-xs font-mono pt-1.5 w-6 md:w-7 shrink-0">{v.number}</span>
+              <div className="flex-1 min-w-0">
+                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2 md:gap-3 mb-3">
+                  <div className="min-w-0">
+                    <h2 className="text-2xl sm:text-3xl md:text-5xl font-black text-white tracking-tight leading-none">
+                      {v.name}
+                    </h2>
+                    <p className="text-blue-500/70 text-xs uppercase tracking-widest mt-2 font-medium">
+                      {v.category}
+                    </p>
+                  </div>
+                  <p className="text-gray-600 text-sm md:text-right shrink-0 md:pt-1">
+                    {v.role}<br />Est. {v.founded}
+                  </p>
+                </div>
+                <p className="text-gray-500 text-sm md:text-base italic">{v.tagline}</p>
+              </div>
+            </div>
+
+            {/* Body grid */}
+            <div className="grid md:grid-cols-3 gap-8 md:gap-10 md:pl-[52px]">
+
+              {/* Description */}
+              <div className="md:col-span-1">
+                <p className="text-gray-300 text-sm leading-relaxed mb-5">
+                  {v.description}
+                </p>
+                {v.highlight && (
+                  <div className="border-l-2 border-blue-600/40 pl-4">
+                    <p className="text-gray-400 text-xs leading-relaxed">{v.highlight}</p>
+                  </div>
+                )}
+                {v.stats && (
+                  <div className="flex flex-wrap gap-3 mt-5">
+                    {v.stats.map((s) => (
+                      <span
+                        key={s}
+                        className="text-[11px] text-gray-500 border border-white/[0.08] px-3 py-1 rounded-full"
+                      >
+                        {s}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Services */}
+              <div>
+                <p className="text-gray-700 text-[10px] uppercase tracking-widest mb-4">
+                  Services
+                </p>
+                <ul className="space-y-2.5">
+                  {v.services.map((s) => (
+                    <li key={s} className="flex items-baseline gap-3 text-gray-400 text-sm">
+                      <span className="w-1 h-1 rounded-full bg-gray-700 shrink-0 mt-1.5" />
+                      {s}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Contact */}
+              <div>
+                <p className="text-gray-700 text-[10px] uppercase tracking-widest mb-4">
+                  Get in Touch
+                </p>
+                <div className="space-y-4">
+                  <div>
+                    <p className="text-[10px] text-gray-700 mb-1">Role</p>
+                    <p className="text-white text-sm font-medium">{v.role}</p>
+                  </div>
+                  <div>
+                    <p className="text-[10px] text-gray-700 mb-1">Phone</p>
+                    <a
+                      href={`tel:${v.contact.phone.replace(/\s/g, '')}`}
+                      className="text-gray-300 text-sm hover:text-white transition-colors"
+                    >
+                      {v.contact.phone}
+                    </a>
+                  </div>
+                  <div>
+                    <p className="text-[10px] text-gray-700 mb-1">Email</p>
+                    <a
+                      href={`mailto:${v.contact.email}`}
+                      className="text-gray-300 text-sm hover:text-white transition-colors break-all"
+                    >
+                      {v.contact.email}
+                    </a>
+                  </div>
+                  <a
+                    href={v.contact.website}
+                    target="_blank"
+                    rel="noopener"
+                    className="group inline-flex items-center gap-2 text-blue-400 text-sm hover:text-blue-300 transition-colors mt-1"
+                  >
+                    <span>{v.contact.websiteLabel}</span>
+                    <span className="group-hover:translate-x-0.5 transition-transform">↗</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        ))}
+        <div className="border-t border-white/[0.07]" />
+
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mt-16 flex flex-col md:flex-row md:items-center md:justify-between gap-6"
+        >
+          <p className="text-gray-500 text-sm">
+            Interested in working with one of my ventures?
+          </p>
+          <Link
+            href="/contact"
+            className="group flex items-center gap-2 text-white text-sm"
+          >
+            <span className="border-b border-white/25 pb-0.5 group-hover:border-white/60 transition-colors duration-300">
+              Start a conversation
+            </span>
+            <span className="text-blue-400 group-hover:translate-x-1 transition-transform">→</span>
+          </Link>
+        </motion.div>
+
+      </div>
+    </main>
+  );
 }

@@ -1,141 +1,260 @@
-// src/app/experience/page.jsx
 'use client';
-import Head from 'next/head';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
-const experiences = [
-	{
-		company: 'Silver Touch Technologies',
-		duration: 'Feb 2024 – May 2024',
-		role: 'Software Development Intern',
-		whatIDid: [
-			'Contributed to automation tools and chatbot development using SAP CoPilot and ChatGPT integrations',
-			'Developed and tested internal bots like ChatOrange and MyBotGiene',
-			'Assisted in building and maintaining internal company web tools',
-			'Collaborated with senior devs to connect APIs and test chatbot flows',
-		],
-		problemsSolved: [
-			'Helped streamline repetitive internal support tasks with smart bots',
-			'Solved conversational flow issues in ChatGPT-based bots using prompt tuning',
-			'Worked on internal tools to improve team communication and performance',
-		],
-		impact: [
-			'Contributed to 4+ AI/chatbot projects during the internship',
-			'Helped improve internal support query resolution speed by ~30%',
-			'Built reusable components used across multiple internal tools',
-		],
-		icon: '🧩',
-	},
-	{
-		company: 'Freelance Full Stack Developer',
-		duration: '2023 – Present',
-		role: 'Independent Developer / Consultant',
-		whatIDid: [
-			'Built full-stack web apps using the MERN stack',
-			'Designed, developed, and deployed client portfolios and AI tools',
-			'Integrated ChatGPT APIs into custom solutions for startups and creators',
-		],
-		problemsSolved: [
-			'Helped non-tech clients get professional online presence with fast-loading websites',
-			'Solved UI/UX and performance issues across platforms',
-			'Improved delivery speed with automation and reusable modules',
-		],
-		impact: [
-			'Completed 10+ projects with 100% delivery success rate',
-			'Achieved Lighthouse scores above 90+ for performance and accessibility',
-			'Reduced average delivery time to 4–5 days per project',
-		],
-		icon: '🧩',
-	},
-];
-
-const fadeUp = {
-	hidden: { opacity: 0, y: 40 },
-	visible: (i = 1) => ({
-		opacity: 1,
-		y: 0,
-		transition: {
-			delay: i * 0.15,
-			duration: 0.7,
-			ease: 'easeOut',
-		},
-	}),
+const inView = {
+  hidden:  { opacity: 0, y: 16 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] } },
 };
 
-export default function Experience() {
-	return (
-		<>
-			<Head>
-				<title>Aman Rajani | Work Experience</title>
-			</Head>
-			<main className='max-w-4xl mx-auto py-16 px-4 md:px-8 w-full min-h-screen'>
-				<div className='mb-12 text-center'>
-					<h1 className='text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-orange-400 to-pink-600 bg-clip-text text-transparent'>
-						Work Experience
-					</h1>
-					<p className='text-lg text-gray-400'>
-						Companies I've worked with and the impact I’ve made
-					</p>
-				</div>
-				<div className='flex flex-col gap-10'>
-					{experiences.map((exp, idx) => (
-						<motion.section
-							key={exp.company}
-							className='bg-white/10 rounded-2xl shadow-xl border border-pink-400/20 p-8 flex flex-col gap-4 hover:shadow-pink-400/20 transition-shadow duration-300'
-							initial='hidden'
-							whileInView='visible'
-							viewport={{ once: true, amount: 0.3 }}
-							custom={idx}
-							variants={fadeUp}
-						>
-							<div className='flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-2'>
-								<div className='flex items-center gap-3'>
-									<span className='text-3xl md:text-4xl'>{exp.icon}</span>
-									<span className='text-xl md:text-2xl font-bold text-pink-400'>
-										{exp.company}
-									</span>
-								</div>
-								<div className='text-sm md:text-base text-gray-400 font-medium flex flex-col md:items-end'>
-									<span className='mb-1'>{exp.role}</span>
-									<span>{exp.duration}</span>
-								</div>
-							</div>
-							<div className='grid md:grid-cols-3 gap-6 mt-4'>
-								<div>
-									<h3 className='font-semibold text-orange-400 mb-2 flex items-center gap-1 text-base md:text-lg'>
-										🔨 What I Worked On
-									</h3>
-									<ul className='list-disc ml-5 space-y-1 text-gray-200 text-base md:text-lg'>
-										{exp.whatIDid.map((item, i) => (
-											<li key={i}>{item}</li>
-										))}
-									</ul>
-								</div>
-								<div>
-									<h3 className='font-semibold text-pink-400 mb-2 flex items-center gap-1 text-base md:text-lg'>
-										🧠 Problems I Solved
-									</h3>
-									<ul className='list-disc ml-5 space-y-1 text-gray-200 text-base md:text-lg'>
-										{exp.problemsSolved.map((item, i) => (
-											<li key={i}>{item}</li>
-										))}
-									</ul>
-								</div>
-								<div>
-									<h3 className='font-semibold text-blue-400 mb-2 flex items-center gap-1 text-base md:text-lg'>
-										📊 Impact & Numbers
-									</h3>
-									<ul className='list-disc ml-5 space-y-1 text-gray-200 text-base md:text-lg'>
-										{exp.impact.map((item, i) => (
-											<li key={i}>{item}</li>
-										))}
-									</ul>
-								</div>
-							</div>
-						</motion.section>
-					))}
-				</div>
-			</main>
-		</>
-	);
+const education = [
+  {
+    year: '2021–2025',
+    school: 'Indus University',
+    degree: 'B.Tech — Computer Science & Engineering',
+    location: 'Ahmedabad, Gujarat',
+  },
+  {
+    year: '2021',
+    school: 'SS Divine',
+    degree: '12th Grade — Higher Secondary',
+    location: 'Gujarat',
+  },
+  {
+    year: '2020',
+    school: 'Kameshwar School',
+    degree: '10th Grade — Secondary',
+    location: 'Gujarat',
+  },
+  {
+    year: 'Till 2019',
+    school: 'SSSV',
+    degree: 'Primary & Middle School',
+    location: 'Gujarat',
+  },
+];
+
+const experience = [
+  {
+    year: 'Jul 2025 – Jan 2026',
+    company: 'DigitalRooar',
+    role: 'Full-Time Backend Developer',
+    type: 'Full-Time',
+    description:
+      'Built and maintained server-side systems, APIs, and integrations — deepening technical expertise while running three ventures in parallel.',
+    points: [
+      'Developed and maintained RESTful APIs and backend services',
+      'Collaborated with cross-functional teams on product delivery',
+      'Built scalable backend architecture supporting business operations',
+      'Gained hands-on experience in production-grade software environments',
+    ],
+  },
+  {
+    year: 'Feb – May 2024',
+    company: 'Silver Touch Technologies',
+    role: 'Software Development Intern',
+    type: 'Internship',
+    description:
+      'Gained real-world exposure to enterprise software development, AI chatbot systems, and team-based engineering during final years of university.',
+    points: [
+      'Contributed to AI/chatbot tools using SAP CoPilot and ChatGPT integrations',
+      'Developed and tested internal bots including ChatOrange and MyBotGiene',
+      'Assisted in building and maintaining internal company web tools',
+      'Collaborated with senior engineers on API connections and chatbot flow testing',
+    ],
+  },
+];
+
+const founding = [
+  { year: 'Nov 2025', name: 'Veolve Tech',    role: 'Founder',                  category: 'IT & AI Company'  },
+  { year: 'Jul 2025', name: 'Voya Marketing', role: 'Founding Partner & CEO',   category: 'Marketing Agency' },
+  { year: 'Nov 2022', name: 'Kartos Designz', role: 'Founding Partner & CEO',   category: 'Design Studio'    },
+];
+
+export default function Journey() {
+  return (
+    <main className="bg-black min-h-screen">
+      <div className="max-w-5xl mx-auto px-6 md:px-16 pt-20 md:pt-28 pb-24 md:pb-36">
+
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="mb-20 md:mb-28"
+        >
+          <p className="text-gray-600 text-[11px] uppercase tracking-[0.22em] mb-6">
+            Background
+          </p>
+          <h1 className="text-5xl md:text-7xl font-black text-white tracking-tight leading-none mb-6">
+            My Journey
+          </h1>
+          <p className="text-gray-500 max-w-sm text-base leading-relaxed">
+            Education, experience, and the milestones that shaped who I am.
+          </p>
+        </motion.div>
+
+        {/* ── Education ── */}
+        <motion.div
+          variants={inView}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          className="mb-16"
+        >
+          <div className="flex items-center gap-4 mb-8">
+            <p className="text-gray-600 text-[11px] uppercase tracking-[0.22em]">Education</p>
+            <div className="flex-1 h-px bg-white/[0.06]" />
+          </div>
+        </motion.div>
+
+        <div className="space-y-0 mb-20 md:mb-28">
+          {education.map((e, idx) => (
+            <motion.div
+              key={e.school}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, delay: idx * 0.05 }}
+              className="border-t border-white/[0.06] py-6 flex flex-col sm:flex-row sm:items-baseline sm:gap-8 gap-1.5 group"
+            >
+              <span className="text-blue-500/60 text-xs font-mono sm:w-28 sm:shrink-0">
+                {e.year}
+              </span>
+              <div className="flex-1">
+                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-1">
+                  <h3 className="text-white font-bold text-base group-hover:text-blue-200 transition-colors duration-300">
+                    {e.school}
+                  </h3>
+                  <span className="text-gray-700 text-xs">{e.location}</span>
+                </div>
+                <p className="text-gray-500 text-sm mt-0.5">{e.degree}</p>
+              </div>
+            </motion.div>
+          ))}
+          <div className="border-t border-white/[0.06]" />
+        </div>
+
+        {/* ── Experience ── */}
+        <motion.div
+          variants={inView}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          className="mb-16"
+        >
+          <div className="flex items-center gap-4 mb-8">
+            <p className="text-gray-600 text-[11px] uppercase tracking-[0.22em]">Experience</p>
+            <div className="flex-1 h-px bg-white/[0.06]" />
+          </div>
+        </motion.div>
+
+        <div className="space-y-0 mb-20 md:mb-28">
+          {experience.map((exp, idx) => (
+            <motion.div
+              key={exp.company}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.6, delay: idx * 0.08, ease: [0.22, 1, 0.36, 1] }}
+              className="border-t border-white/[0.06] py-10"
+            >
+              <div className="flex flex-col sm:flex-row sm:gap-8 sm:items-start gap-1.5">
+                <span className="text-blue-500/60 text-xs font-mono sm:w-28 sm:shrink-0">
+                  {exp.year}
+                </span>
+                <div className="flex-1">
+                  <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-1 mb-1">
+                    <h3 className="text-white font-black text-lg md:text-xl">
+                      {exp.company}
+                    </h3>
+                    <span className="text-gray-600 text-xs border border-white/[0.08] px-2.5 py-1 rounded-full self-start">
+                      {exp.type}
+                    </span>
+                  </div>
+                  <p className="text-blue-400/70 text-sm font-medium mb-4">{exp.role}</p>
+                  <p className="text-gray-400 text-sm leading-relaxed mb-5 max-w-xl">
+                    {exp.description}
+                  </p>
+                  <ul className="space-y-2">
+                    {exp.points.map((p) => (
+                      <li key={p} className="flex items-baseline gap-3 text-gray-500 text-sm">
+                        <span className="text-gray-700 shrink-0">—</span>
+                        {p}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+          <div className="border-t border-white/[0.06]" />
+        </div>
+
+        {/* ── Ventures Founded ── */}
+        <motion.div
+          variants={inView}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          className="mb-12"
+        >
+          <div className="flex items-center gap-4 mb-8">
+            <p className="text-gray-600 text-[11px] uppercase tracking-[0.22em]">Founded</p>
+            <div className="flex-1 h-px bg-white/[0.06]" />
+          </div>
+          <p className="text-gray-500 text-sm leading-relaxed max-w-xl mb-10">
+            Alongside education and full-time work, I founded and grew three companies — each
+            built while balancing university, internships, and professional roles.
+          </p>
+        </motion.div>
+
+        <div className="space-y-0 mb-14">
+          {founding.map((f, idx) => (
+            <motion.div
+              key={f.name}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, delay: idx * 0.05 }}
+              className="border-t border-white/[0.06] py-6 flex flex-col sm:flex-row sm:items-baseline sm:gap-8 gap-1.5 group"
+            >
+              <span className="text-blue-500/60 text-xs font-mono sm:w-28 sm:shrink-0">
+                {f.year}
+              </span>
+              <div className="flex-1">
+                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-1">
+                  <h3 className="text-white font-bold text-base group-hover:text-blue-200 transition-colors duration-300">
+                    {f.name}
+                  </h3>
+                  <span className="text-gray-600 text-xs">{f.category}</span>
+                </div>
+                <p className="text-gray-600 text-sm mt-0.5">{f.role}</p>
+              </div>
+            </motion.div>
+          ))}
+          <div className="border-t border-white/[0.06]" />
+        </div>
+
+        <div className="flex gap-6">
+          <Link
+            href="/projects"
+            className="group flex items-center gap-2 text-white text-sm"
+          >
+            <span className="border-b border-white/25 pb-0.5 group-hover:border-white/60 transition-colors duration-300">
+              Explore Ventures
+            </span>
+            <span className="text-blue-400 group-hover:translate-x-1 transition-transform">↗</span>
+          </Link>
+          <Link
+            href="/contact"
+            className="text-gray-600 hover:text-gray-300 text-sm transition-colors"
+          >
+            Get in Touch →
+          </Link>
+        </div>
+
+      </div>
+    </main>
+  );
 }

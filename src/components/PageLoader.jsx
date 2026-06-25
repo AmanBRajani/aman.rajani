@@ -1,29 +1,78 @@
-// src/components/PageLoader.jsx
 'use client';
 import { motion } from 'framer-motion';
 
 export default function PageLoader() {
   return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-gradient-to-br from-[#181824] via-[#23243a] to-[#0a0a23]">
+    <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-black">
+
+      {/* Subtle grid */}
+      <div className="absolute inset-0 bg-grid opacity-60 pointer-events-none" />
+
+      {/* Ambient glow */}
+      <div className="absolute w-[400px] h-[400px] bg-blue-700/20 rounded-full blur-[120px] pointer-events-none" />
+
+      {/* Logo mark */}
+      <div className="relative flex items-center justify-center mb-8">
+        {/* Outer spinning ring */}
+        <motion.div
+          className="absolute w-24 h-24 rounded-full border border-blue-500/30"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
+          style={{
+            background: 'conic-gradient(from 0deg, transparent 70%, rgba(59,130,246,0.6) 100%)',
+          }}
+        />
+
+        {/* Inner spinning ring (counter) */}
+        <motion.div
+          className="absolute w-16 h-16 rounded-full border border-blue-400/20"
+          animate={{ rotate: -360 }}
+          transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
+          style={{
+            background: 'conic-gradient(from 180deg, transparent 60%, rgba(96,165,250,0.4) 100%)',
+          }}
+        />
+
+        {/* Centre logo */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+          className="w-12 h-12 rounded-xl bg-blue-600/15 border border-blue-500/25 flex items-center justify-center"
+        >
+          <span className="text-lg font-black text-blue-400 tracking-tight">AR</span>
+        </motion.div>
+      </div>
+
+      {/* Name */}
+      <motion.p
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3, duration: 0.5 }}
+        className="text-white font-black text-xl tracking-tight mb-1"
+      >
+        AMAN<span className="text-blue-500">.</span>RAJANI
+      </motion.p>
+
+      {/* Tagline */}
+      <motion.p
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.5, duration: 0.5 }}
+        className="text-gray-600 text-xs uppercase tracking-[0.2em]"
+      >
+        Entrepreneur &nbsp;·&nbsp; Founder
+      </motion.p>
+
+      {/* Loading bar */}
       <motion.div
-        initial={{ scale: 0, rotate: 0, opacity: 0 }}
-        animate={{ scale: [0, 1.2, 1], rotate: [0, 360], opacity: [0, 1, 1, 0.8, 1] }}
-        transition={{ duration: 1.2, repeat: Infinity, repeatType: 'reverse', ease: 'easeInOut' }}
-        className="relative w-20 h-20 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full bg-gradient-to-tr from-orange-400 via-pink-500 to-purple-600 shadow-2xl flex items-center justify-center"
-        style={{ boxShadow: '0 0 40px 8px #e52e71cc, 0 0 0 4px #fff2' }}
+        className="absolute bottom-10 w-32 h-px bg-white/5 overflow-hidden rounded-full"
       >
         <motion.div
-          className="absolute inset-2 sm:inset-3 md:inset-4 rounded-full border-4 border-white/30 animate-spin-slow"
-          animate={{ rotate: 360 }}
-          transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
+          className="h-full bg-gradient-to-r from-transparent via-blue-500 to-transparent"
+          animate={{ x: ['-100%', '200%'] }}
+          transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
         />
-        <motion.span
-          className="text-2xl sm:text-3xl md:text-4xl font-extrabold bg-gradient-to-r from-orange-400 to-pink-500 bg-clip-text text-transparent drop-shadow-lg"
-          animate={{ scale: [1, 1.2, 1], opacity: [1, 0.7, 1] }}
-          transition={{ duration: 1.2, repeat: Infinity, repeatType: 'reverse', ease: 'easeInOut' }}
-        >
-          AR
-        </motion.span>
       </motion.div>
     </div>
   );
